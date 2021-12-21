@@ -2,6 +2,7 @@
 // where your node app starts
 
 // init project
+var bGround = require('fcc-express-bground');
 var express = require('express');
 var app = express();
 
@@ -18,15 +19,15 @@ app.get("/", function (req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
 
-
 // your first API endpoint... 
 app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
-
-
+var myApp = require('./myApp')
+var port = 3001;
 // listen for requests :)
-var listener = app.listen(process.env.PORT, function () {
-  console.log('Your app is listening on port ' + listener.address().port);
+
+bGround.setupBackgroundApp(app, myApp, __dirname).listen(port, function () {
+  console.log('Your app is listening on port ' + port);
 });
